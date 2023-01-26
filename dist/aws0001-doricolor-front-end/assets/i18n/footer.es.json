@@ -1,0 +1,14 @@
+{
+    "footer": {
+        "Summary": "Resumen",
+        "TransactionType": "Tipo de operación",
+        "Callout": {
+            "Initial": "En Iris tu dinero obtiene un rendimiento del",
+            "End": "al mes"
+        },
+        "Earnings": {
+            "Initial": "Tu dinero ya ha ganado",
+            "End": "en este periodo"
+        }
+    }
+}
