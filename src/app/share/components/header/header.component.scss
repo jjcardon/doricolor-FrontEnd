@@ -1,0 +1,23 @@
+header{
+    display: grid;
+    grid-template-columns: 1fr 0.001fr;
+    padding: 2rem 0rem;
+}
+
+.img-banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.options-header{
+    padding-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+mat-divider{
+    display: flex;
+    width: 80%;
+    margin: auto;
+}

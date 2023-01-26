@@ -1,0 +1,57 @@
+<div class="shipment">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="trackingNumber">
+            <th mat-header-cell *matHeaderCellDef> Guia </th>
+            <td mat-cell *matCellDef="let element"> {{element.trackingNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef> Ciudad Destino </th>
+            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef> Destinatario </th>
+            <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> Direccion </th>
+            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+        </ng-container>
+        <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef> Telefono </th>
+            <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="unit">
+            <th mat-header-cell *matHeaderCellDef> Unidades </th>
+            <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actualWeight">
+            <th mat-header-cell *matHeaderCellDef> Peso Real </th>
+            <td mat-cell *matCellDef="let element"> {{element.actualWeight}} </td>
+        </ng-container>
+        <ng-container matColumnDef="weightVolume">
+            <th mat-header-cell *matHeaderCellDef> Peso Volumen </th>
+            <td mat-cell *matCellDef="let element"> {{element.weightVolume}} </td>
+        </ng-container>
+        <ng-container matColumnDef="shipping">
+            <th mat-header-cell *matHeaderCellDef> Referencia </th>
+            <td mat-cell *matCellDef="let element"> {{element.shipping}} </td>
+        </ng-container>
+        <ng-container matColumnDef="observation">
+            <th mat-header-cell *matHeaderCellDef> Observacion </th>
+            <td mat-cell *matCellDef="let element"> {{element.observation}} </td>
+        </ng-container>
+        <ng-container matColumnDef="declaredValue">
+            <th mat-header-cell *matHeaderCellDef> Valor declarado </th>
+            <td mat-cell *matCellDef="let element"> {{element.declaredValue |currency:"COP":"$ ":'4.2-2'}}    </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+
+</div>
+<div class="paginator">
+   <mat-paginator  [pageSizeOptions]="[5, 10, 20, 50, 100]" [pageSize]="5" showFirstLastButtons aria-label="Select page of shipment">
+    </mat-paginator>
+</div>
+ 
