@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ShareModule } from './share/share.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'COP' },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
