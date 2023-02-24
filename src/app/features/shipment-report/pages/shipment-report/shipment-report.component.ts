@@ -27,9 +27,10 @@ export class ShipmentReportComponent {
     'unit',
     'actualWeight',
     'weightVolume',
+    'declaredValue',
     'shipping',
-    'observation',
-    'declaredValue'
+    'observation'
+    
   ]
 
   ngAfterViewInit() {
@@ -68,9 +69,10 @@ export class ShipmentReportComponent {
         'Unidades',
         'PesoReal',
         'PesoVolumen',
+        'ValorDeclarado',
         'Referencia',
-        'Observaciones',
-        'ValorDeclarado'
+        'Observaciones'
+        
       ]
     };
     const now = Date.now();
