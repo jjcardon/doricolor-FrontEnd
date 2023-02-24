@@ -1,68 +1,74 @@
-<div class="shipment">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="trackingNumber">
-            <th mat-header-cell *matHeaderCellDef> Num_guia</th>
-            <td mat-cell *matCellDef="let element"> {{element.trackingNumber}}
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="city">
-            <th mat-header-cell *matHeaderCellDef> Ciud_Destino </th>
-            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
-        </ng-container>
-        <ng-container matColumnDef="customer">
-            <th mat-header-cell *matHeaderCellDef> Nom_Destinatario </th>
-            <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
-        </ng-container>
-        <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef> Dir_Destinatario </th>
-            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-        </ng-container>
-        <ng-container matColumnDef="phoneNumber">
-            <th mat-header-cell *matHeaderCellDef> Tel_Destinatario </th>
-            <td mat-cell *matCellDef="let element"> {{element.phoneNumber}}
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="unit">
-            <th mat-header-cell *matHeaderCellDef> Num_Unidades </th>
-            <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
-        </ng-container>
-        <ng-container matColumnDef="actualWeight">
-            <th mat-header-cell *matHeaderCellDef> PesoReal_K </th>
-            <td mat-cell *matCellDef="let element"> {{element.actualWeight}}
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="weightVolume">
-            <th mat-header-cell *matHeaderCellDef> PesoVolumen_K </th>
-            <td mat-cell *matCellDef="let element"> {{element.weightVolume}}
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="declaredValue">
-            <th mat-header-cell *matHeaderCellDef> Valor_Declarado </th>
-            <td mat-cell *matCellDef="let element"> {{element.declaredValue
-                |currency:"COP":"$ ":'1.0'}} </td>
-        </ng-container>
-        <ng-container matColumnDef="shipping">
-            <th mat-header-cell *matHeaderCellDef> Doc_Referencia </th>
-            <td mat-cell *matCellDef="let element"> {{element.shipping}} </td>
-        </ng-container>
-        <ng-container matColumnDef="observation">
-            <th mat-header-cell *matHeaderCellDef> Observciones </th>
-            <td mat-cell *matCellDef="let element"> {{element.observation}}
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
- 
-
+<div *ngIf="isLoader && !isNullInfo">
+    <div class="shipment">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="tableShipmentReport">
+            <ng-container matColumnDef="trackingNumber">
+                <th mat-header-cell *matHeaderCellDef> Num_guia</th>
+                <td mat-cell *matCellDef="let element"> {{element.trackingNumber}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="city">
+                <th mat-header-cell *matHeaderCellDef> Ciud_Destino </th>
+                <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+            </ng-container>
+            <ng-container matColumnDef="customer">
+                <th mat-header-cell *matHeaderCellDef> Nom_Destinatario </th>
+                <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
+            </ng-container>
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef> Dir_Destinatario </th>
+                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+            <ng-container matColumnDef="phoneNumber">
+                <th mat-header-cell *matHeaderCellDef> Tel_Destinatario </th>
+                <td mat-cell *matCellDef="let element"> {{element.phoneNumber}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef> Num_Unidades </th>
+                <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actualWeight">
+                <th mat-header-cell *matHeaderCellDef> PesoReal_K </th>
+                <td mat-cell *matCellDef="let element"> {{element.actualWeight}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="weightVolume">
+                <th mat-header-cell *matHeaderCellDef> PesoVolumen_K </th>
+                <td mat-cell *matCellDef="let element"> {{element.weightVolume}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="declaredValue">
+                <th mat-header-cell *matHeaderCellDef> Valor_Declarado </th>
+                <td mat-cell *matCellDef="let element"> {{element.declaredValue
+                    |currency:"COP":"$ ":'1.0'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="shipping">
+                <th mat-header-cell *matHeaderCellDef> Doc_Referencia </th>
+                <td mat-cell *matCellDef="let element"> {{element.shipping}} </td>
+            </ng-container>
+            <ng-container matColumnDef="observation">
+                <th mat-header-cell *matHeaderCellDef> Observciones </th>
+                <td mat-cell *matCellDef="let element"> {{element.observation}}
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <div class="paginator">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" [pageSize]="5" showFirstLastButtons
+            aria-label="Select page of shipment">
+        </mat-paginator>
+    </div>
+    <div class="d-flex-info">
+        <button mat-raised-button [disabled]="!existDataToExport" (click)="exportToCSV()">Exportar CSV</button>
+    </div>
 </div>
-<div class="paginator">
-    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" [pageSize]="5"
-        showFirstLastButtons aria-label="Select page of shipment">
-    </mat-paginator>
+
+<div class="d-flex-info" *ngIf="!isLoader && !isNullInfo">
+    <mat-spinner></mat-spinner>
 </div>
 
-<div class="button">
-    <button mat-raised-button [disabled]="!existDataToExport"
-        (click)="exportToCSV()">Exportar CSV</button>
+<div *ngIf="isNullInfo">
+    <h3 class="d-flex-info">No se encontraron regitros!!!</h3>
 </div>

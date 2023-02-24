@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ShipmentReport, ShippingReport } from 'src/app/core/models/shipment-report/shipment-report.model';
+import { ShippingReport } from 'src/app/core/models/shipment-report/shipment-report.model';
 import { ShipmentReportService } from '../../services/shipment-report.service';
 import { MatPaginatorIntl, PageEvent } from "@angular/material/paginator";
-import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { DatePipe } from '@angular/common';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 @Component({
   selector: 'app-shipment-report',
@@ -15,7 +15,8 @@ import { DatePipe } from '@angular/common';
 export class ShipmentReportComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   existDataToExport: boolean = false;
-  formattedDatePrint: string = '';
+  isLoader: boolean = false;
+  isNullInfo: boolean = false;
   dataSource = new MatTableDataSource<ShippingReport>();
 
   displayedColumns = [
@@ -30,55 +31,36 @@ export class ShipmentReportComponent {
     'declaredValue',
     'shipping',
     'observation'
-    
   ]
+  exportAsConfig: ExportAsConfig = {
+    type: 'xlsx', 
+    elementIdOrContent: 'tableShipmentReport'
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
   constructor(private shipmentReportService: ShipmentReportService, private matPaginatorIntl: MatPaginatorIntl,
-    private dataPipe: DatePipe) {
+    private exportAsService: ExportAsService, private datePipe: DatePipe) {
     this.GetShipmentReport();
     this.matPaginatorIntl.itemsPerPageLabel = 'Registros por página';
   }
 
   GetShipmentReport() {
     this.shipmentReportService.getShipmentReport().subscribe((resp) => {
-      resp.status === 200 ? this.existDataToExport = true : false;
-      this.dataSource.data = resp.shippingReport
+        this.existDataToExport = true
+        this.isLoader = true;      
+        this.dataSource.data = resp.shippingReport
+        resp.status === 203 ? this.isNullInfo = true : false;
     });
   }
 
-  exportToCSV() {
-    var options = {
-      fieldSeparator: ',',
-      quoteStrings: '',
-      decimalseparator: '.',
-      showLabels: true,
-      showTitle: true,
-      title: '',
-      useBom: true,
-      noDownload: false,
-      headers: [
-        'Guia',
-        'CiudadDestino',
-        'Destinatario',
-        'Direccion',
-        'Telefono',
-        'Unidades',
-        'PesoReal',
-        'PesoVolumen',
-        'ValorDeclarado',
-        'Referencia',
-        'Observaciones'
-        
-      ]
-    };
+  exportToCSV() {   
     const now = Date.now();
-    this.formattedDatePrint = this.dataPipe.transform(now, 'ddMMYYHHmmss') as string;
-    var titleDocument = 'ReporteEnvios-' + this.formattedDatePrint
-    new ngxCsv(this.dataSource.data, titleDocument, options);
+    const formattedDate = this.datePipe.transform(now, 'ddMMyyyyHHmmss');
+    const fileName = `TCC${formattedDate}`; 
+    this.exportAsService.save(this.exportAsConfig, fileName ).subscribe(() => {});
   }
 
 }
