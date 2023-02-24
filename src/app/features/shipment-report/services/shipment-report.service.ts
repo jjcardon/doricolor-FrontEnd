@@ -11,6 +11,6 @@ export class ShipmentReportService {
   constructor(private httpClient: HttpClient) { }
 
   getShipmentReport(): Observable<ShipmentReport> {
-    return this.httpClient.get<ShipmentReport>(`https://fcklzsmp20.execute-api.us-east-2.amazonaws.com/dev`);
+    return this.httpClient.get<ShipmentReport>(`https://lykc2xcize.execute-api.us-east-1.amazonaws.com/prod`);
   }
 }

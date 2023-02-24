@@ -36,6 +36,11 @@
             <td mat-cell *matCellDef="let element"> {{element.weightVolume}}
             </td>
         </ng-container>
+        <ng-container matColumnDef="declaredValue">
+            <th mat-header-cell *matHeaderCellDef> Valor declarado </th>
+            <td mat-cell *matCellDef="let element"> {{element.declaredValue
+                |currency:"COP":"$ ":'1.0'}} </td>
+        </ng-container>
         <ng-container matColumnDef="shipping">
             <th mat-header-cell *matHeaderCellDef> Referencia </th>
             <td mat-cell *matCellDef="let element"> {{element.shipping}} </td>
@@ -44,11 +49,6 @@
             <th mat-header-cell *matHeaderCellDef> Observacion </th>
             <td mat-cell *matCellDef="let element"> {{element.observation}}
             </td>
-        </ng-container>
-        <ng-container matColumnDef="declaredValue">
-            <th mat-header-cell *matHeaderCellDef> Valor declarado </th>
-            <td mat-cell *matCellDef="let element"> {{element.declaredValue
-                |currency:"COP":"$ ":'4.2-2'}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

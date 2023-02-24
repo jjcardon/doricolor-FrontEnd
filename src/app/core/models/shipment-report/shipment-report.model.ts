@@ -13,7 +13,7 @@ export interface ShippingReport {
     unit: number;
     actualWeight: number;
     weightVolume: number;
-    shipping: string;
+    shipping: number;
     observation: string;
     declaredValue: number;
 }
